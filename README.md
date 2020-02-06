@@ -1,7 +1,7 @@
 # **pyUnit-NER** [![](https://gitee.com/tyoui/logo/raw/master/logo/photolog.png)][1]
 
 ## NER模块集合
-[![](https://img.shields.io/badge/Python-3.7-green.svg)]()
+[![](https://img.shields.io/badge/Python-3.7-green.svg)](https://pypi.org/project/pyunit-ner/)
 [![](https://img.shields.io/badge/Docker-Eboby-red.svg)](https://github.com/jtyoui/eboby)
 [![](https://img.shields.io/badge/Email-jtyoui@qq.com-red.svg)]()
 

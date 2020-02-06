@@ -17,7 +17,7 @@ setup(
     description=__description__,
     long_description=long_text,
     long_description_content_type="text/markdown",
-    url='https://github.com/PyUnit/pyunit-net',
+    url='https://github.com/PyUnit/pyunit-ner',
     author=__author__,
     author_email=__email__,
     license='MIT Licence',
