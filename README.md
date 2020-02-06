@@ -19,8 +19,9 @@
 from pyunit_ner import ernie_st,ernie_match,ERNIE_MODEL_PARAMETER,ERNIE_LABEL_MAP,parseNER
 model = 'D://model' #解压的文件夹的地址
 s = ernie_st(new_model_path=model, new_config=ERNIE_MODEL_PARAMETER, new_label_map_config=ERNIE_LABEL_MAP)
-data = ernie_match('我叫刘万光我是贵阳市南明叇村永乐乡水塘村的村民', s)
+data = ernie_match('刘万光对李伟说：在贵阳市南明村永乐乡发生了一件恐怖的事情', s)
 print(parseNER(data))
+# {'number': ['0', '1', '1', '6', '0', '1', '6', '6', '6', '4', '5', '5', '4', '5', '5', '4', '5', '5', '6', '6', '6', '6', '6', '6', '6', '6', '6', '6'], 'word': ['刘', '万', '光', '对', '李', '伟', '说', '：', '在', '贵', '阳', '市', '南', '明', '村', '永', '乐', '乡', '发', '生', '了', '一', '件', '恐', '怖', '的', '事', '情'], 'person': ['刘万光', '李伟'], 'organization': [], 'address': ['贵阳市南明村永乐乡']}
 ```
 
 

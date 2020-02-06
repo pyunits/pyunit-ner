@@ -1,3 +1,6 @@
-.idea/
-venv/
+.idea/*
+venv/*
 *.pyc
+build/*
+dist/*
+pyunit_ner.egg-info/*
