@@ -9,7 +9,7 @@
     pip install pyunit-ner
     
 ### 默认官方数据集训练的模型（只能识别：人名、地名、机构名）
-[点击下载模型](http://oss.tyoui.cn/model.zip)
+[点击下载模型](http://oss.jtyoui.com/model/%E5%AE%9E%E4%BD%93%E6%8A%BD%E5%8F%96.rar)
 
 ### docker安装
 [点击查看](https://github.com/jtyoui/eboby)
