@@ -2,8 +2,9 @@
 # -*- coding: utf-8 -*-
 # @Time  : 2019/11/7 10:26
 # @Author: Jtyoui@qq.com
-from .run_msra import ernie_st, ernie_match, ERNIE_MODEL_PARAMETER, ERNIE_LABEL_MAP  # 实体识别
 import re
+
+from .run_msra import ernie_st, ernie_match, ERNIE_MODEL_PARAMETER, ERNIE_LABEL_MAP  # 实体识别
 
 
 def parseNER(msra) -> dict:
@@ -27,7 +28,7 @@ def parseNER(msra) -> dict:
     return data
 
 
-__version__ = '2019.11.7'
+__version__ = '2020.8.12'
 __author__ = 'Jtyoui'
 __description__ = '百度实体抽取模型'
 __email__ = 'jtyoui@qq.com'

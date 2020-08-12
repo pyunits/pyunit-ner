@@ -3,6 +3,7 @@
 # @Time  : 2019/5/9 11:50
 # @Author: Jtyoui@qq.com
 from setuptools import setup, find_packages
+
 from pyunit_ner import __version__, __author__, __description__, __email__, __names__, __url__
 
 with open('README.md', encoding='utf-8') as f:

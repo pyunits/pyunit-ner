@@ -3,6 +3,7 @@
 # @Time  : 2019/8/23 13:39
 # @Author: Jtyoui@qq.com
 from functools import partial
+
 import paddle.fluid as fluid
 import paddle.fluid.layers as layers
 

@@ -2,11 +2,13 @@
 # -*- coding: utf-8 -*-
 # @Time  : 2019/4/11 11:44
 # @Author: Jtyoui@qq.com
-from .transformer_encoder import encoder, pre_process_layer
-from .vocab import vocal
+import os
+
 import numpy as np
 from paddle import fluid
-import os
+
+from .transformer_encoder import encoder, pre_process_layer
+from .vocab import vocal
 
 ERNIE_MODEL_PARAMETER = {
     "attention_probs_dropout_prob": 0.1,
