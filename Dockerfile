@@ -14,6 +14,6 @@ ENV DIR /mnt/pyunit-ner
 COPY ./ ${DIR}
 WORKDIR ${DIR}
 
-RUN unrar e /home/实体抽取.rar ${MODEL_PATH} && /home/实体抽取.rar
+RUN unrar e /home/实体抽取.rar ${MODEL_PATH} && rm -rf /home/实体抽取.rar
 RUN pip install --no-cache-dir -r requirements.txt
 CMD ["sh","app.sh"]
