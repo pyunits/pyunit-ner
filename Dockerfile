@@ -1,6 +1,7 @@
 FROM python:3.7
 MAINTAINER Jytoui <jtyoui@qq.com>
 
+COPY sources.list /etc/apt/sources.list
 RUN apt-get update && apt-get install unrar -y
 RUN wget -P /home http://oss.jtyoui.com/model/实体抽取.rar
 
