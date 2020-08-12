@@ -73,9 +73,10 @@ if __name__ == '__main__':
 
 ## DockerHub镜像下载
     docker pull jtyoui/pyunit-ner
+    docker run -d -P jtyoui/pyunit-ner
 
 ## 抽取实体接口文档
-url：http://xxx.xxx.xxx.xxx:9000/st
+url：http://xxx.xxx.xxx.xxx:9000/pyunit/ner
 methods：POST
 
 ### 请求报文
@@ -85,8 +86,16 @@ methods：POST
 
 ### 请求示例
 ```python
+import requests
 
-```
+url = "http://127.0.0.1:9000/pyunit/ner"
+data = {
+    'data': '我在贵州贵阳观山湖',
+}
+headers = {'Content-Type': "application/x-www-form-urlencoded"}
+response = requests.post(url, data=data, headers=headers).json()
+print(response)
+``` 
 
 ### 返回报文
 | **参数名** | **类型** | **NULL** | **说明** |
@@ -97,7 +106,41 @@ methods：POST
 |person | list |Yes| 人名 |
 |org | list |Yes| 机构名 |
 
-
+```json
+{
+    "code": 200,
+    "entity": {
+        "address": [
+            "贵州贵阳观山湖"
+        ],
+        "number": [
+            "6",
+            "6",
+            "4",
+            "5",
+            "4",
+            "5",
+            "4",
+            "5",
+            "5"
+        ],
+        "organization": [],
+        "person": [],
+        "word": [
+            "我",
+            "在",
+            "贵",
+            "州",
+            "贵",
+            "阳",
+            "观",
+            "山",
+            "湖"
+        ]
+    },
+    "msg": "success"
+}
+```
 
 ***
 [1]: https://blog.jtyoui.com
