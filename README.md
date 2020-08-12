@@ -69,5 +69,35 @@ if __name__ == '__main__':
 ### 官网地址
 [点击ERNIE查看地址](https://github.com/PaddlePaddle/ERNIE)  
 
+
+
+## DockerHub镜像下载
+    docker pull jtyoui/pyunit-ner
+
+## 抽取实体接口文档
+url：http://xxx.xxx.xxx.xxx:9000/st
+methods：POST
+
+### 请求报文
+| **参数名** | **类型** | **NULL** | **说明** |
+|:----:|:----:|:----:|:----:|
+|data| string |Yes| 数据 |
+
+### 请求示例
+```python
+
+```
+
+### 返回报文
+| **参数名** | **类型** | **NULL** | **说明** |
+|:----:|:----:|:----:|:----:|
+|msg | string | Yes| 返回消息 |
+|data | list |Yes| 标注数据类型 |
+|address | list |Yes| 地址 |
+|person | list |Yes| 人名 |
+|org | list |Yes| 机构名 |
+
+
+
 ***
 [1]: https://blog.jtyoui.com
