@@ -14,7 +14,8 @@ RUN apk add --no-cache --virtual mypacks \
             g++ \
             cmake \
             make \
-            git
+            git && \
+            apk add --no-cache python3
 
 WORKDIR /opt
 
