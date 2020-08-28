@@ -6,6 +6,9 @@ EXPOSE 5000
 ENV MODEL_PATH /mnt/model
 RUN mkdir ${MODEL_PATH}
 
+# 更换APK源
+#RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+
 # 安装Python3环境
 RUN apk add --no-cache --virtual mypacks \
             gcc  \
@@ -17,15 +20,15 @@ RUN apk add --no-cache --virtual mypacks \
             git && \
             apk add --no-cache python3
 
+RUN ln /usr/bin/python3 /usr/bin/python
+
 WORKDIR /opt
 
 RUN wget http://oss.jtyoui.com/github/Paddle-1.8.3.tar.gz && \
     tar -zxvf Paddle-1.8.3.tar.gz && \
     rm -rf Paddle-1.8.3.tar.gz
 
-RUN pip3 install --no-cache-dir numpy protobuf
-
-RUN ln /usr/lib/python3 /usr/lib/python
+RUN pip3 install --no-cache-dir numpy protobuf wheel
 
 RUN mkdir build && \
     cd build && \
