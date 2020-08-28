@@ -1,35 +1,35 @@
-FROM python:3.7-alpine
+FROM alpine:3.12.0
 MAINTAINER Jytoui <jtyoui@qq.com>
 
-# 加入pip源
-ENV pypi=https://pypi.douban.com/simple \
-    MODEL_PATH=/mnt/msra \
-    DIR=/mnt/pyunit-ner
-
-# 支持安装manylinux1编译的wheel包
-#RUN echo 'manylinux1_compatible = True' > /usr/local/lib/python3.7/site-packages/_manylinux.py
-#RUN echo 'manylinux2014_compatible = True' > /usr/local/lib/python3.7/site-packages/_manylinux.py
-
-# 开放端口
 EXPOSE 5000
 
-# 更换APK源
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+ENV MODEL_PATH /mnt/model
+RUN mkdir ${MODEL_PATH}
 
-RUN apk add --no-cache py3-six py3-requests curl unrar py3-numpy
+# 安装Python3环境
+RUN apk add --no-cache --virtual mypacks \
+            gcc  \
+            python3-dev \
+            py-pip \
+            g++ \
+            cmake \
+            make \
+            git
 
-# 构建编译环境
-RUN apk add -U --no-cache --virtual=build_alpine_env \
-    py-pip \
-    gcc  \
-    python3-dev \
-    linux-headers \
-    musl-dev && \
-    pip install --no-cache-dir paddlepaddle flask uWSGI -i ${pypi} && \
-    apk del build_alpine_env
+WORKDIR /opt
 
-#RUN curl -o /mnt/model.rar http://oss.jtyoui.com/model/实体抽取.rar && unrar x /mnt/model.rar && rm -rf /mnt/model.rar
+RUN wget http://oss.jtyoui.com/github/Paddle-1.8.3.tar.gz && \
+    tar -zxvf Paddle-1.8.3.tar.gz && \
+    rm -rf Paddle-1.8.3.tar.gz
 
+RUN pip3 install --no-cache-dir numpy protobuf
+
+RUN mkdir build && \
+    cd build && \
+    cmake -S ../ -B . -DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")  -DPYTHON_LIBRARY=$(python -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") && \
+    make
+
+ENV DIR /mnt/pyunit-ner
 COPY ./ ${DIR}
 WORKDIR ${DIR}
 
