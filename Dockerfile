@@ -24,6 +24,8 @@ RUN wget http://oss.jtyoui.com/github/Paddle-1.8.3.tar.gz && \
 
 RUN pip3 install --no-cache-dir numpy protobuf
 
+RUN ln /usr/lib/python3 /usr/lib/python
+
 RUN mkdir build && \
     cd build && \
     cmake -S ../ -B . -DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")  -DPYTHON_LIBRARY=$(python -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") && \
