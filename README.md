@@ -9,9 +9,9 @@
     pip install pyunit-ner
     
 ### 默认官方数据集训练的模型（只能识别：人名、地名、机构名）
-[点击下载模型](http://oss.jtyoui.com/model/%E5%AE%9E%E4%BD%93%E6%8A%BD%E5%8F%96.rar)
+[点击下载模型](http://oss.jtyoui.com/model/model.tar.gz)
 
-### docker安装
+### docker安装（已删除）
 [点击查看](https://github.com/jtyoui/eboby)
 
 ### 默认的参数和映射表
@@ -68,8 +68,6 @@ if __name__ == '__main__':
     
 ### 官网地址
 [点击ERNIE查看地址](https://github.com/PaddlePaddle/ERNIE)  
-
-
 
 ## DockerHub镜像下载
     docker pull jtyoui/pyunit-ner
