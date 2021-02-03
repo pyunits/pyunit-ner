@@ -37,3 +37,4 @@ jobs:
           password: ${{ secrets.DOCKER_PASSWORD }}
           repository: jtyoui/pyunit-ner
           tag_with_ref: true
+          tag_with_sha: true
