@@ -28,7 +28,7 @@ def parseNER(msra) -> dict:
     return data
 
 
-__version__ = '2020.8.12'
+__version__ = '2021.2.3'
 __author__ = 'Jtyoui'
 __description__ = '百度实体抽取模型'
 __email__ = 'jtyoui@qq.com'
