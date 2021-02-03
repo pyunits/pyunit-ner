@@ -4,3 +4,4 @@ venv/*
 build/*
 dist/*
 pyunit_ner.egg-info/*
+.github

@@ -1,41 +1,18 @@
-FROM alpine:3.12.0
+FROM tiangolo/uvicorn-gunicorn-fastapi:python3.8
+
 MAINTAINER Jytoui <jtyoui@qq.com>
 
-EXPOSE 5000
+COPY requirements.txt /app/requirements.txt
 
-ENV MODEL_PATH /mnt/model
-RUN mkdir ${MODEL_PATH}
-
-# 更换APK源
-RUN sed -i 's/dl-cdn.alpinelinux.org/mirrors.aliyun.com/g' /etc/apk/repositories
+# 加入pip源
+ENV pypi https://pypi.douban.com/simple
 
 # 安装Python3环境
-RUN apk add --no-cache --virtual mypacks \
-            gcc  \
-            python3-dev \
-            py-pip \
-            g++ \
-            cmake \
-            make \
-            git && \
-            apk add --no-cache python3 patchelf
+RUN pip3 install --no-cache-dir -r /app/requirements.txt -i ${pypi}
 
-RUN ln /usr/bin/python3 /usr/bin/python
+RUN apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 3B4FE6ACC0B21F32
 
-WORKDIR /opt
-
-RUN pip3 install --no-cache-dir numpy protobuf wheel -i https://pypi.douban.com/simple
-
-RUN wget http://oss.jtyoui.com/github/Paddle-1.8.3.tar.gz && \
-    tar -zxvf Paddle-1.8.3.tar.gz && \
-    cd Paddle-1.8.3 && \
-    mkdir build && \
-    cd build && \
-    cmake -S ../ -B . -DPYTHON_INCLUDE_DIR=$(python -c "from distutils.sysconfig import get_python_inc; print(get_python_inc())")  -DPYTHON_LIBRARY=$(python -c "import distutils.sysconfig as sysconfig; print(sysconfig.get_config_var('LIBDIR'))") && \
-    make
-
-ENV DIR /mnt/pyunit-ner
-COPY ./ ${DIR}
-WORKDIR ${DIR}
-
-CMD ["sh","app.sh"]
+COPY ./sources.list /etc/apt/sources.list
+RUN apt-get update && apt-get install -y libgl1-mesa-glx
+COPY ./pyunit_ner /app/pyunit_ner
+COPY ./main.py /app/main.py
