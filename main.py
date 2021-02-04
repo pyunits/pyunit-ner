@@ -19,7 +19,9 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-ENTITY = ernie_st(ERNIE_MODEL_PATH)
+ENTITY = []
+if not ENTITY:
+    ENTITY = ernie_st(ERNIE_MODEL_PATH)
 
 
 class ResponseModal(BaseModel):
@@ -36,7 +38,7 @@ class ResponseModal(BaseModel):
 
 
 @app.get('/pyunit/ner', summary='实体接口', response_model=ResponseModal)
-def st(data: str = Query(..., description='文本数据', min_length=1)):
+async def st(data: str = Query(..., description='文本数据', min_length=1)):
     """实体抽取"""
     try:
         word = ernie_match(data, ENTITY)
