@@ -10,7 +10,6 @@ from paddle import fluid
 from pyunit_ner.transformer_encoder import encoder, pre_process_layer
 from pyunit_ner.vocab import vocal
 import re
-from paddle.fluid.transpiler.distribute_transpiler import DistributeTranspilerConfig
 
 config = {
     "attention_probs_dropout_prob": 0.1,
@@ -127,20 +126,19 @@ def reader_text(texts):
 
     def wrapper():
         words_ls = [[1] + list(map(lambda x: vocal.get(x, 3), _text)) + [2] for _text in texts]
+        padded_token_ids, padded_input_mask, padded_position_ids = [], [], []
+        for words in words_ls:
+            residue = max_len - len(words)
+            padded_token_ids.append(words + [0] * residue)
+            padded_input_mask.append([1] * len(words) + [0] * residue)
+            padded_position_ids.append(list(range(len(words))) + [0] * residue)
 
-        padded_token_ids = np.array([inst + list([0] * (max_len - len(inst))) for inst in words_ls],
-                                    dtype=np.int64).reshape([-1, max_len, 1])
+        padded_token_ids = np.array(padded_token_ids, dtype=np.int64).reshape([-1, max_len, 1])
+        padded_input_mask = np.array(padded_input_mask, dtype=np.float32).reshape([-1, max_len, 1])
+        padded_text_ids = np.zeros(padded_input_mask.shape, dtype=np.int64)
+        padded_position_ids = np.array(padded_position_ids, dtype=np.int64).reshape([-1, max_len, 1])
 
-        padded_input_mask = np.array([[1] * len(inst) + [0] * (max_len - len(inst)) for inst in words_ls],
-                                     dtype=np.float32).reshape([-1, max_len, 1])
-
-        padded_text_type_ids = np.zeros(padded_input_mask.shape, dtype=np.int64)
-
-        padded_position_ids = np.array([list(range(len(words))) + [0] * (max_len - len(words)) for words in words_ls],
-                                       dtype=np.int64).reshape([-1, max_len, 1])
-
-        return_list = [padded_token_ids, padded_text_type_ids, padded_position_ids, padded_input_mask]
-        yield return_list
+        yield padded_token_ids, padded_text_ids, padded_position_ids, padded_input_mask
 
     print('-------start-----------')
     reader.decorate_tensor_provider(wrapper)
