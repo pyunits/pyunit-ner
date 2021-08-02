@@ -16,19 +16,19 @@ jobs:
         with:
           python-version: '3.8'
 
-#      - name: 初始化Python
-#        run: |
-#          python -m pip install --upgrade pip
-#          pip install -r requirements.txt
-#          pip install setuptools wheel twine
-#
-#      - name: 构建Python包并上传到PYPI
-#        env:
-#          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
-#          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
-#        run: |
-#          python setup.py sdist bdist_wheel
-#          twine upload dist/*
+      - name: 初始化Python
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install setuptools wheel twine
+
+      - name: 构建Python包并上传到PYPI
+        env:
+          TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+          TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+        run: |
+          python setup.py sdist bdist_wheel
+          twine upload dist/*
 
       - name: 构建Docker并上传到DockerHub
         uses: docker/build-push-action@v1.1.0

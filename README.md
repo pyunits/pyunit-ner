@@ -1,18 +1,27 @@
 # **pyUnit-NER** [![](https://gitee.com/tyoui/logo/raw/master/logo/photolog.png)][1]
 
 ## NER模块集合
-[![](https://img.shields.io/badge/Python-3.7-green.svg)](https://pypi.org/project/pyunit-ner/)
-[![](https://img.shields.io/badge/Docker-Eboby-red.svg)](https://github.com/jtyoui/eboby)
+
+[![](https://img.shields.io/badge/Python-3.8-green.svg)](https://pypi.org/project/pyunit-ner/)
 [![](https://img.shields.io/badge/Email-jtyoui@qq.com-red.svg)]()
 
 ### 安装
-    pip install pyunit-ner
-    
-### 默认官方数据集训练的模型（只能识别：人名、地名、机构名）
-[点击下载模型](http://oss.jtyoui.com/model/model.tar.gz)
 
+    pip install pyunit-ner
+
+### 推荐使用Docker部署
+
+```shell
+docker pull jtyoui/pyunit-ner
+docker run -d -P jtyoui/pyunit-ner
+```
+
+### 默认官方数据集训练的模型（只能识别：人名、地名、机构名）
+
+[点击下载模型](https://github.com/PyUnit/pyunit-ner/releases/download/v1.0/model.tar.gz)
 
 ### 默认的参数和映射表
+
 ```python
 import pprint
 from pyunit_ner import ernie_st, ernie_match, parseNER
@@ -31,24 +40,20 @@ if __name__ == '__main__':
     pprint.pprint(test())
 ```
 
-
-### 官网地址
-[点击ERNIE查看地址](https://github.com/PaddlePaddle/ERNIE)  
-
-## DockerHub镜像下载
-    docker pull jtyoui/pyunit-ner
-    docker run -d -P -v 下载模型的地址:/mnt/model jtyoui/pyunit-ner
-
 ## 抽取实体接口文档
-    http://xxx.xxx.xxx.xxx:端口/docs
 
+    http://ip:port/docs
+
+![接口文档](./exec.png)
 
 ### 请求报文
+
 | **参数名** | **类型** | **NULL** | **说明** |
 |:----:|:----:|:----:|:----:|
 |data| string |Yes| 数据 |
 
 ### 请求示例
+
 ```python
 import requests
 
@@ -59,6 +64,7 @@ print(response)
 ``` 
 
 ### 返回报文
+
 | **参数名** | **类型** | **NULL** | **说明** |
 |:----:|:----:|:----:|:----:|
 |msg | string | Yes| 返回消息 |
@@ -69,39 +75,40 @@ print(response)
 
 ```json
 {
-    "code": 200,
-    "entity": {
-        "address": [
-            "贵州贵阳观山湖"
-        ],
-        "number": [
-            "6",
-            "6",
-            "4",
-            "5",
-            "4",
-            "5",
-            "4",
-            "5",
-            "5"
-        ],
-        "organization": [],
-        "person": [],
-        "word": [
-            "我",
-            "在",
-            "贵",
-            "州",
-            "贵",
-            "阳",
-            "观",
-            "山",
-            "湖"
-        ]
-    },
-    "msg": "success"
+  "code": 200,
+  "entity": {
+    "address": [
+      "贵州贵阳观山湖"
+    ],
+    "number": [
+      "6",
+      "6",
+      "4",
+      "5",
+      "4",
+      "5",
+      "4",
+      "5",
+      "5"
+    ],
+    "organization": [],
+    "person": [],
+    "word": [
+      "我",
+      "在",
+      "贵",
+      "州",
+      "贵",
+      "阳",
+      "观",
+      "山",
+      "湖"
+    ]
+  },
+  "msg": "success"
 }
 ```
 
 ***
+
 [1]: https://blog.jtyoui.com

@@ -4,7 +4,7 @@
 # @Author: Jtyoui@qq.com
 from .ner import reader_text
 
-__version__ = '2021.2.5'
+__version__ = '2021.8.2'
 __author__ = 'Jtyoui'
 __description__ = '百度实体抽取模型'
 __email__ = 'jtyoui@qq.com'
